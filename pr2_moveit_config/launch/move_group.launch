@@ -1,6 +1,6 @@
 <launch>
 
-  <include file="$(find tidyup_pr2_moveit_config)/launch/planning_context.launch" />
+  <include file="$(find pr2_moveit_config)/launch/planning_context.launch" />
 
   <arg name="openni_nodelet_manager_name" />
 
@@ -16,27 +16,27 @@
   <arg name="fake_execution" default="false"/>
   <arg name="max_safe_path_cost" default="1"/>
   <arg name="publish_monitored_planning_scene" default="true"/>
-  <arg name="moveit_octomap_sensor_params_file" default="$(find tidyup_pr2_moveit_config)/config/sensors_kinect.yaml" />
+  <arg name="moveit_octomap_sensor_params_file" default="$(find pr2_moveit_config)/config/sensors_kinect.yaml" />
 
-  <include ns="move_group" file="$(find tidyup_pr2_moveit_config)/launch/planning_pipeline.launch.xml">
+  <include ns="move_group" file="$(find pr2_moveit_config)/launch/planning_pipeline.launch.xml">
     <arg name="pipeline" value="ompl" />
   </include>
 
-  <include file="$(find tidyup_pr2_moveit_config)/launch/point_cloud_motion_filter.launch">
+  <include file="$(find pr2_moveit_config)/launch/point_cloud_motion_filter.launch">
     <arg name="openni_nodelet_manager_name" value="$(arg openni_nodelet_manager_name)" />
   </include>
 
-  <include file="$(find tidyup_pr2_moveit_config)/launch/point_cloud_ground_filter.launch">
+  <include file="$(find pr2_moveit_config)/launch/point_cloud_ground_filter.launch">
     <arg name="openni_nodelet_manager_name" value="$(arg openni_nodelet_manager_name)" />
   </include>
 
-  <include ns="move_group" file="$(find tidyup_pr2_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
+  <include ns="move_group" file="$(find pr2_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_controller_manager" value="pr2" unless="$(arg fake_execution)"/>
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
     <arg name="moveit_manage_controllers" value="true" />
   </include>
 
-  <include ns="move_group" file="$(find tidyup_pr2_moveit_config)/launch/sensor_manager.launch.xml" if="$(arg allow_trajectory_execution)">
+  <include ns="move_group" file="$(find pr2_moveit_config)/launch/sensor_manager.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_sensor_manager" value="pr2" /> 
     <arg name="moveit_octomap_sensor_params_file" value="$(arg moveit_octomap_sensor_params_file)"/>
   </include>
@@ -67,6 +67,6 @@
     <param name="planning_scene_monitor/publish_transforms_updates" value="$(arg publish_monitored_planning_scene)" />
   </node>
 
-  <rosparam command="load" file="$(find tidyup_pr2_moveit_config)/config/grasping.yaml"/>
+  <rosparam command="load" file="$(find pr2_moveit_config)/config/grasping.yaml"/>
   
 </launch>

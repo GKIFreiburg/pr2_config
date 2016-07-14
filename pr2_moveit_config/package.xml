@@ -1,6 +1,6 @@
 <package>
 
-  <name>tidyup_pr2_moveit_config</name>
+  <name>pr2_moveit_config</name>
   <version>0.5.7</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the pr2 with the MoveIt Motion Planning Framework
