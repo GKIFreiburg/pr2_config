@@ -2,7 +2,7 @@
 
   <include file="$(find pr2_moveit_config)/launch/planning_context.launch" />
 
-  <arg name="openni_nodelet_manager_name" />
+  <arg name="openni_nodelet_manager_name" default="openni_nodelet_manager"/>
 
   <arg name="debug" default="false" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
