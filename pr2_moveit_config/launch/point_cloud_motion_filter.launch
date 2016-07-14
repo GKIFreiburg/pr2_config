@@ -14,8 +14,8 @@ frame_ids:
 #- odom
 - map
 </rosparam>
-		<remap from="input" to="/head_mount_kinect2/depth_registered/points"/>
-		<remap from="output" to="/head_mount_kinect/depth_registered/points_motion_filtered"/>
+		<remap from="input" to="head_mount_kinect2/depth_registered/points"/>
+		<remap from="output" to="head_mount_kinect2/depth_registered/points_motion_filtered"/>
 	</node>
 </launch>
 
