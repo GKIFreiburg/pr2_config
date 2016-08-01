@@ -1,0 +1,27 @@
+<launch>
+  <arg name="debug" default="false" />
+
+  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+  <arg     if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args" />
+
+  <node ns="local_costmap" name="voxel_grid_throttle" pkg="topic_tools" type="throttle" args="messages voxel_grid 3.0 voxel_grid_throttled" />
+
+  <node pkg="move_base" launch-prefix="$(arg launch_prefix)" type="move_base" respawn="false" name="move_base_node" output="screen" required="true">
+
+    <rosparam file="$(find pr2_3dnav_config)/config/common_costmap_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find pr2_3dnav_config)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find pr2_3dnav_config)/config/global_planner_params.yaml" command="load" />
+    <param name="GKI3dNavPlanner/motion_primitive_filename" value="$(find pr2_3dnav_config)/config/pr2.mprim" />
+    <param name="GKI3dNavPlanner/freespace_heuristic_costmap" value="$(find pr2_3dnav_config)/config/pr2_freespace_costmap.dat" />
+    
+    <rosparam file="$(find pr2_3dnav_config)/config/common_costmap_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find pr2_3dnav_config)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find pr2_3dnav_config)/config/local_planner_params.yaml" command="load" />
+    <rosparam file="$(find pr2_3dnav_config)/config/local_planner_poses.yaml" command="load" />
+    <!-- 
+    <rosparam file="$(find pr2_3dnav_config)/config/local_planner_params_close.yaml" command="load" />
+     -->
+
+    <remap from="cmd_vel" to="navigation/cmd_vel"/>
+  </node>
+</launch>
