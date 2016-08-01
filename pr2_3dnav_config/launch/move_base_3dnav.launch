@@ -18,9 +18,6 @@
     <rosparam file="$(find pr2_3dnav_config)/config/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find pr2_3dnav_config)/config/local_planner_params.yaml" command="load" />
     <rosparam file="$(find pr2_3dnav_config)/config/local_planner_poses.yaml" command="load" />
-    <!-- 
-    <rosparam file="$(find pr2_3dnav_config)/config/local_planner_params_close.yaml" command="load" />
-     -->
 
     <remap from="cmd_vel" to="navigation/cmd_vel"/>
   </node>
